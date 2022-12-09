@@ -1,0 +1,20 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "This project will be made only by pure JS , pure CSS , pure HTML",
+  "main": "backend/server.js",
+  "scripts": {
+    "server": "nodemon backend/server.js",
+    "start": "node backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karem-obied/project.git"
+  },
+  "author": "karem obied",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karem-obied/project/issues"
+  },
+  "homepage": "https://github.com/karem-obied/project#readme"
+}
