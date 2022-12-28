@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("../model/User");
 
 const reg = asyncHandler(async (req, res) => {
@@ -22,7 +22,7 @@ const reg = asyncHandler(async (req, res) => {
         _id: user._id,
         userName,
         email,
-        token: generate(user._id),
+        token: generate(user.id),
       });
     }
   } else {
@@ -37,7 +37,7 @@ const login = asyncHandler(async (req, res) => {
     if (email && (await bcrypt.compare(password, user.password))) {
       res.status(200).json({
         _id: user._id,
-        userName,
+        userName: user.userName,
         email,
         token: generate(user._id),
       });
@@ -55,16 +55,22 @@ const login = asyncHandler(async (req, res) => {
     throw new Error("This Account Does not Exist");
   }
 });
-const logout = asyncHandler(async (req, res) => {
+const del = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) {
     res.status(400);
     throw new Error("User Does Not Exist");
   } else {
     await user.remove();
-    res.status(200).json({ id: user.params.id });
+    res.status(200).json({ id: req.params.id });
   }
 });
 const generate = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 };
+const userControlers = {
+  reg,
+  login,
+  del,
+};
+module.exports = userControlers;

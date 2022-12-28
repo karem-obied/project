@@ -5,7 +5,7 @@ const connectDataBase = async () => {
     console.log(`DataBase Server is Runnging on port${conn.connection.host}`);
   } catch (error) {
     console.log(error);
-    exit(1);
+    process.exit(1);
   }
 };
 module.exports = connectDataBase;
