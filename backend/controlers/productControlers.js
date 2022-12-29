@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 const add = asyncHandler(async (req, res) => {
   const { name, qty, price } = req.body;
-  const image = req.body.image;
+  const image = req.file.filename;
   const user = await User.findById(req.user);
   if (!user) {
     res.status(401);
